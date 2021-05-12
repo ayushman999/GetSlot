@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hackslash.getslot.Model.Districts;
 import com.hackslash.getslot.Model.Hospital;
 
@@ -37,12 +38,14 @@ public class SlotsActivity extends AppCompatActivity {
     ArrayList<Hospital> hospitals=new ArrayList<>();
     ImageView noSlotImage;
     TextView noSlotText;
+    private FirebaseAnalytics firebaseAnalytics;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slots);
         Intent data=getIntent();
+        firebaseAnalytics=FirebaseAnalytics.getInstance(this);
         noSlotImage=(ImageView) findViewById(R.id.no_vaccine);
         noSlotText=(TextView) findViewById(R.id.no_slot_title);
         int state=data.getIntExtra("state",0);

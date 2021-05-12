@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hackslash.getslot.Model.Districts;
 import com.hackslash.getslot.Model.States;
 
@@ -36,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     static ArrayList<States> states=new ArrayList<>();
     ArrayList<String> districtName=new ArrayList<>();
     static ArrayList<Districts> districts=new ArrayList<>();
+    private FirebaseAnalytics firebaseAnalytics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        firebaseAnalytics=FirebaseAnalytics.getInstance(this);
         stateSpinner =(Spinner) findViewById(R.id.state);
         districtSpinner =(Spinner) findViewById(R.id.district);
         search=(Button) findViewById(R.id.search);
