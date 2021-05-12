@@ -2,17 +2,36 @@ package com.hackslash.getslot;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.hackslash.getslot.Model.Districts;
+import com.hackslash.getslot.Model.Hospital;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SlotsActivity extends AppCompatActivity {
-
+    RecyclerView recyclerView;
+    HospitalAdapter adapter;
+    ArrayList<Hospital> hospitals=new ArrayList<>();
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +43,42 @@ public class SlotsActivity extends AppCompatActivity {
         SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
         Date currentDate=new Date();
         String date=sdf.format(currentDate);
-        System.out.println(date);
+        recyclerView=(RecyclerView) findViewById(R.id.hospitals);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        if(state>0 && district>0) {
+            fetchHospitals(state,district,date);
+        }
+    }
+
+    private void fetchHospitals(int state,int district,String date) {
+        String centerURL="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id="+district+"&date="+date;
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, centerURL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray districtList=response.getJSONArray("centers");
+                    for(int i=0;i<districtList.length();i++) {
+                        JSONObject centerHospital=districtList.getJSONObject(i);
+                        String name=centerHospital.getString("name");
+                        String fee_type=centerHospital.getString("fee_type");
+                        String address=centerHospital.getString("address");
+                        hospitals.add(new Hospital(name,address,fee_type));
+                    }
+                    adapter=new HospitalAdapter(hospitals);
+                    recyclerView.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(SlotsActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);
     }
 }

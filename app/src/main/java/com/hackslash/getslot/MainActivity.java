@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     Spinner stateSpinner, districtSpinner;
     Button search;
+    int age=0;
     static int state,district;
     ArrayList<String> stateName=new ArrayList<>();
     static ArrayList<States> states=new ArrayList<>();
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Intent trasfer=new Intent(MainActivity.this, SlotsActivity.class);
                 trasfer.putExtra("state",state);
                 trasfer.putExtra("district",district);
+                trasfer.putExtra("age",age);
                 startActivity(trasfer);
             }
         });
@@ -173,6 +176,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             district=districts.get(0).getDistrict_id();
+        }
+    }
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio18:
+                if (checked)
+                    age=18;
+                    break;
+            case R.id.radio45:
+                if (checked)
+                    age=45;
+                    break;
         }
     }
 }

@@ -11,7 +11,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
@@ -27,14 +26,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:padding="20dp"
                     android:id="@+id/state"
                     />
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
+                    android:padding="20dp"
                     android:id="@+id/district"
                     android:layout_margin="5dp"
                     />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/radio18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18+"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/white"
+                        android:onClick="onRadioButtonClicked"/>
+                    <RadioButton android:id="@+id/radio45"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="45+"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:onClick="onRadioButtonClicked"/>
+                </RadioGroup>
+
+
+
 
             <Button
                 android:id="@+id/search"
