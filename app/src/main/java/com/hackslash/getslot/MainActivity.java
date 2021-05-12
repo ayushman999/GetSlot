@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             districtName.add("None");
         }
         String districtURL="https://cdn-api.co-vin.in/api/v2/admin/location/districts/"+state;
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, districtURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText(MainActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
             }
         });
-        requestQueue.add(request);
+        MySingleton.getInstance(this).addToRequestQue(request);
     }
 
     private void setupDistrictSpinner(Spinner districtSpinner) {
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void fetchStates() {
         String stateURL="https://cdn-api.co-vin.in/api/v2/admin/location/states";
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, stateURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -137,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText(MainActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
             }
         });
-        requestQueue.add(request);
+        MySingleton.getInstance(this).addToRequestQue(request);
     }
 
     private void setupStateSpinner(Spinner stateSpinner) {

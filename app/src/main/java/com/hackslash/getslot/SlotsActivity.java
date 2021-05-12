@@ -64,7 +64,6 @@ public class SlotsActivity extends AppCompatActivity {
 
     private void fetchHospitals(int state,int district,String date,int age) {
         String centerURL="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id="+district+"&date="+date;
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, centerURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -111,6 +110,6 @@ public class SlotsActivity extends AppCompatActivity {
                 Toast.makeText(SlotsActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
             }
         });
-        requestQueue.add(request);
+        MySingleton.getInstance(this).addToRequestQue(request);
     }
 }
