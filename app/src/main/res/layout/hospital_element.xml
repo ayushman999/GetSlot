@@ -13,9 +13,21 @@
         >
         <TextView
             android:id="@+id/hospital_name"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_toLeftOf="@id/hospital_price"
             android:layout_height="wrap_content"
             android:text="Sample Hospital"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/vaccine_name"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/hospital_price"
+            android:layout_height="wrap_content"
+            android:text="Covaxin"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             />
@@ -32,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
-            android:layout_below="@id/hospital_name"
+            android:layout_below="@id/vaccine_name"
             android:layout_margin="5dp"
             android:id="@+id/view"
 
@@ -48,6 +60,25 @@
             android:layout_marginLeft="10dp"
             android:paddingBottom="10dp"
 
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@id/hospital_address"
+            android:layout_margin="5dp"
+            android:id="@+id/view2"
+
+            />
+        <TextView
+            android:id="@+id/hospial_sessions"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view2"
+            android:text="Sessions"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             />
 
     </RelativeLayout>

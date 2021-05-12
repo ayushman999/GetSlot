@@ -32,6 +32,8 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.Hospit
         holder.address.setText(hospitals.get(position).getAddress());
         holder.fee.setText(hospitals.get(position).getFeetype());
         holder.name.setText(hospitals.get(position).getName());
+        holder.vaccine.setText(hospitals.get(position).getVaccine());
+        holder.session.setText(hospitals.get(position).getSessions());
     }
 
     @Override
@@ -40,12 +42,14 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.Hospit
     }
 
     public class HospitalHolder extends RecyclerView.ViewHolder {
-        TextView name,fee,address;
+        TextView name,fee,address,view,session,vaccine;
         public HospitalHolder(@NonNull View itemView) {
             super(itemView);
             name=(TextView) itemView.findViewById(R.id.hospital_name);
             fee=(TextView) itemView.findViewById(R.id.hospital_price);
             address=(TextView) itemView.findViewById(R.id.hospital_address);
+            session=(TextView) itemView.findViewById(R.id.hospial_sessions);
+            vaccine=(TextView) itemView.findViewById(R.id.vaccine_name);
         }
     }
 }
